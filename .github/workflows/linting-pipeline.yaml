@@ -1,0 +1,24 @@
+name: Lint Code Base
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v4
+      - name: Install HTMLHint
+        run: npm install --save-dev htmlhint
+      - name: Lint HTML Files
+        run: npx htmlhint "*/.html"
+      - name: Install Stylelint
+        run: npm install stylelint stylelint-config-standard --save-dev
+      - name: Lint CSS Files
+        run: npx stylelint "*/.css"
